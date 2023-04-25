@@ -67,7 +67,21 @@ function renderPrevSearches() {
         previousSearchUl.appendChild(recipeLi);                                 // Append the li element to the ul element
     }
 
+    // Attach event listener to ".previousSearchLi" elements after they have been created
 
+    var storedRecipes = document.querySelectorAll(".previousSearchLi");
+
+    storedRecipes.forEach(function(storedRecipe) {
+
+        storedRecipe.addEventListener("click", function(event) {
+
+        event.preventDefault();
+        queryRecipeName = this.textContent;  // this is the value that will be used for the api call" 
+        
+        getRecipes(queryRecipeName);        // Call the function to get the recipes data
+
+        });
+    });
     }
 }
 
