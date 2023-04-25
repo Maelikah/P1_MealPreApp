@@ -18,12 +18,16 @@ var queryRecipeName = "Pan-Browned Brussel Sprouts"
 consultedRecipes.push("Pan-Browned Brussel Sprouts");
 localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
 mainIngredient = "brussel sprout"
-
+ingredient = "chicken";
+mealType = "lunch";
+cuisineType = "mexican";
 
 
 
 // Define variables to traverse the DOM
 var mainModal = document.getElementById("mainModal");
+var loadingModal = document.getElementById("loadingModal");
+var recipeListModal = document.getElementById("recipeListModal");
 var previousSearchUl = document.getElementById("previousSearchUl");
 var recipeDiv = document.getElementById("recipeDiv");
 var recipeImageDiv = document.getElementById("recipeImageDiv");
@@ -31,6 +35,7 @@ var recipeNameDiv = document.getElementById("recipeNameDiv");
 var recipeIngredientsDiv = document.getElementById("recipeIngredientsDiv");
 var recipeLinkDiv = document.getElementById("recipeLinkDiv");
 var recipeFactsDiv = document.getElementById("recipeFactsDiv");
+var recipeListUl = document.getElementById("recipeListUl");
 
 // List functions to execute: 
 
@@ -244,6 +249,53 @@ function getStoredRecipes(queryRecipeName) {
             `;
         })
 }
+
+
+// getRecipesList() - Code for function that will fetch a recipes list based on user input
+
+function getRecipesList() {
+
+    recipeListUl.innerHTML = ""; // Clear contents for the previous Search list
+
+
+    // // Construct the Recipe Search API endpoint using the values input by the user value
+    var recipeUrl = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${recipeAppId}&app_key=${recipeAppKey}&q=${ingredient}&mealType=${mealType}&cuisineType=${cuisineType}`;
+    
+    // // Fetch data from the Edamam Recipe Search API
+
+    fetch(recipeUrl)
+    
+        .then(function(response){
+            return response.json();
+        })
+
+        .then(function(data) {
+
+            var recipes = [];
+            if (data.hits) {
+                recipes = data.hits;
+            }
+
+            
+            for (var i = 0; i < 10; i++) {
+                var recipe = recipes[i].recipe;
+                console.log("Recipe Name: ", recipe.label);
+                var recipeName = recipe.label;
+                // Add contents to the html page
+                var recipeLi = document.createElement("li");                            // Create a new li element
+                recipeLi.className = "recipeListLi";                                // Set the class for the li element
+                var liInnerDiv = document.createElement("div");                         // Create a new div element
+                liInnerDiv.className = "custom-column column is-narrow box mt-1 mb-1";  // Set the classes for the div element
+                liInnerDiv.textContent = recipeName;
+                recipeLi.appendChild(liInnerDiv);                                       // Append the div element to the li element
+                recipeListUl.appendChild(recipeLi);                                 // Append the li element to the ul element
+            }
+        })
+}
+
+
+
+
 
 
 // Event Listeners:
