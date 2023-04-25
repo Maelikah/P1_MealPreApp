@@ -67,20 +67,7 @@ function renderPrevSearches() {
         previousSearchUl.appendChild(recipeLi);                                 // Append the li element to the ul element
     }
 
-    // // Attach event listener to ".custom-li" elements after they have been created
 
-    // var storedCities = document.querySelectorAll(".custom-li");
-
-    // storedCities.forEach(function(storedCity) {
-
-    //     storedCity.addEventListener("click", function(event) {
-
-    //     event.preventDefault();
-    //     city = this.textContent;  // this is the value that will be used for the api call, so it MUST be called "city" 
-        
-    //     getCoordinates(city);        // Call the function to get the weather data
-    //     });
-    // });
     }
 }
 
