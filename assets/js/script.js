@@ -4,7 +4,8 @@ var recipeAppKey = "7537eeca1e7b8144211802174e66b65a";
 var ingredientAppId = "92abae99";
 var ingredientAppKey = "3b826e041a1b3986fff646d47026e872";
 
-
+//TEST VAR DELETE
+var queryRecipeName = "Pan-Browned Brussel Sprouts"
 
 // Define global variables
 var ingredient = "";
@@ -14,13 +15,29 @@ var consultedRecipes = [];
 
 // Define variables to traverse the DOM
 var previousSearchUl = document.getElementById("previousSearchUl");
+var recipeDiv = document.getElementById("recipeDiv");
+var recipeImageDiv = document.getElementById("recipeImageDiv");
+var recipeNameDiv = document.getElementById("recipeNameDiv");
+var recipeIngredientsDiv = document.getElementById("recipeIngredientsDiv");
+var recipeLinkDiv = document.getElementById("recipeLinkDiv");
+var recipeFactsDiv = document.getElementById("recipeFactsDiv");
 
 // List functions to execute: 
 
 init ();                    // Call function that loads previous searches  
 
 
+
+
 // Functions: 
+
+// localStorePreviousSearches() - Code for funtion that will store input data inside the cities array into the local storage
+
+function localStorePreviousSearches() {
+
+    localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
+}
+
 
 // init () - Code for function that will load initial data and previous searches
 
@@ -34,14 +51,20 @@ function init () {
         previousSearches.sort(); // Sort searches alphabetically
     }
 
-    renderPrevSearches(); // Call function to create content related to previous searches stored in local storage
+    clearRecipeData();      // Call function to delete content related to recipe data in the html 
+    renderPrevSearches();   // Call function to create content related to previous searches stored in local storage
 }
 
-// localStorePreviousSearches() - Code for funtion that will store input data inside the cities array into the local storage
 
-function localStorePreviousSearches() {
+// clearRecipeData() - Code for function to clear innerHTML contents for divs containing recipe data in the html file
 
-    localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
+function clearRecipeData() {
+
+    recipeImageDiv.innerHTML = "";
+    recipeNameDiv.innerHTML = "";
+    recipeIngredientsDiv.innerHTML = "";
+    recipeLinkDiv.innerHTML = "";
+    recipeFactsDiv.innerHTML = "";
 }
 
 // renderPrevSearches() - Code for function that will create li elements showing previous searches in the html main modal
@@ -89,7 +112,7 @@ function renderPrevSearches() {
 
 function getStoredRecipes(queryRecipeName) {
     var recipeUrl = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${recipeAppId}&app_key=${recipeAppKey}&q=${queryRecipeName}`;
-    var ingredientUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${ingredientAppI}d&app_key=${ingredientAppKey}&ingr=${ingredient}`;
+    //var ingredientUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${ingredientAppI}d&app_key=${ingredientAppKey}&ingr=${ingredient}`;
 
     fetch(recipeUrl)
     
@@ -103,30 +126,41 @@ function getStoredRecipes(queryRecipeName) {
             if (data.hits) {
                 recipes = data.hits;
             }
-
-            for (var i = 0; i < recipes.length; i++ ) {
-
-                var recipe = recipes[i].recipe;
+            
+                var recipe = recipes[0].recipe;
                 console.log("Recipe Name: ", recipe.label);
                 console.log("Recipe URL: ", recipe.url);
                 console.log("Recipe Image: ", recipe.image);
                 console.log("Recipe Ingredients: ", recipe.ingredientLines.slice(0, 5));
-
-            }
-
-
-
+                console.log("Recipe Ingredients: ");
+                console.log("Recipe Main Ingredient: ", recipe.ingredients[0].food);
         })
-
-
-
-
-
-
-
-
 }
 
 
 // Event Listeners:
 
+    //var recipeUrl = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${recipeAppId}&app_key=${recipeAppKey}&q=${queryRecipeName}`;
+    //var ingredientUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${ingredientAppI}d&app_key=${ingredientAppKey}&ingr=${ingredient}`;
+
+    // fetch(recipeUrl)
+    
+    //     .then(function(response){
+    //         return response.json();
+    //     })
+
+    //     .then(function(data) {
+
+    //         var recipes = [];
+    //         if (data.hits) {
+    //             recipes = data.hits;
+    //         }
+            
+    //             var recipe = recipes[0].recipe;
+    //             console.log("Recipe Name: ", recipe.label);
+    //             console.log("Recipe URL: ", recipe.url);
+    //             console.log("Recipe Image: ", recipe.image);
+    //             console.log("Recipe Ingredients: ", recipe.ingredientLines.slice(0, 5));
+    //             console.log("Recipe Ingredients: ");
+    //             console.log("Recipe Main Ingredient: ", recipe.ingredients[0].food);
+    //     })

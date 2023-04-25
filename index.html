@@ -16,11 +16,11 @@
                 MealPreApp
             </h1>
         </header>
-        <div class="tile is-ancestor">
+        <div id="recipeDiv" class="tile is-ancestor">
             <div class="tile is-parent mt-5 m-3">
                 <article class="tile is-child box has-background-warning ">
                     
-                    <figure class="image ">
+                    <figure id="recipeImageDiv" class="image ">
                     <img src="https://i1.wp.com/static.flickr.com/109/315912786_faddcc36ec_z.jpg?w=640">
                     </figure>
                 </article>
@@ -32,12 +32,12 @@
                     <div class="tile ">
                         <div class="tile is-parent is-vertical ">
                             <article class="tile is-child box has-background-info">
-                                <div class="has-background-dark box ">
+                                <div id="recipeNameDiv" class="has-background-dark box ">
                                 <p class="title is-size-2 has-text-centered has-text-white p-2">Pan-Browned Brussel Sprouts</p>
                                 </div>
                             </article>
                             <article class="tile is-child box has-background-info">
-                                <div class="has-background-dark box">
+                                <div id="recipeIngredientsDiv" class="has-background-dark box">
                                     <p class="title is-size-4  has-text-white has-text-centered">Main Ingredients</p>
                                     <p class="subtitle has-text-white">
                                         <br>
@@ -55,14 +55,14 @@
                         </div>
                         <div class="tile is-parent is-vertical">
                             <article class="tile is-child box has-text-centered has-background-info">
-                                <div class="has-background-dark box">
+                                <div id="recipeLinkDiv" class="has-background-dark box">
                                 <p class="title is-size-3 has-text-white  p-2">Preparation Instructions</p>
                                 <button class="button is-white">Get Recipe</button>
                                 </div>
                             </article>
                             <br>
                             <article class="tile is-child box has-background-info">
-                                <div class="has-background-dark box">
+                                <div id="recipeFactsDiv" class="has-background-dark box">
                                     <p class="title is-size-4  has-text-white has-text-centered">Nutritional Facts</p>
                                     <p class="subtitle has-text-white">
                                         <br>
@@ -72,7 +72,7 @@
                                         1 tbsp Olive Oil <br>
                                         2 tbsp Pine nut <br>
                                     </p>
-                                    </div>
+                                </div>
                             </article>
                             <br>
                         </div>
@@ -87,7 +87,7 @@
 
         <!-- Modal that serves as main page -->
 
-        <div id="mainModal" class="modal is-active">
+        <div id="mainModal" class="modal">
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
                 <div class="modal-card">
