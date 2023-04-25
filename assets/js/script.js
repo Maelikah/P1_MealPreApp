@@ -53,7 +53,7 @@ function localStorePreviousSearches() {
 
 function init () {
 
-    mainModal.classList.add("is-active");
+   // mainModal.classList.add("is-active");
     var previousSearches = JSON.parse(localStorage.getItem("consultedRecipes"));
 
     if (previousSearches !== null) {
@@ -63,7 +63,7 @@ function init () {
     }
 
     
-    clearRecipeData();      // Call function to delete content related to recipe data in the html 
+  //  clearRecipeData();      // Call function to delete content related to recipe data in the html 
     renderPrevSearches();   // Call function to create content related to previous searches stored in local storage
 }
 
@@ -168,7 +168,7 @@ function getStoredRecipes(queryRecipeName) {
 
             recipeIngredientsDiv.innerHTML = `
             <p class="title is-size-4  has-text-white has-text-centered">Main Ingredients</p>
-            <p class="subtitle has-text-white">
+            <p class="custom-p subtitle m-1 has-text-centered">
                 <br>
                 ${recipeIngredients}                    
             </p>
@@ -226,19 +226,19 @@ function getStoredRecipes(queryRecipeName) {
             recipeFactsDiv.innerHTML = `
             <p class="title is-size-4  has-text-white has-text-centered">Nutritional Facts</p>
             <br>
-            <p class="subtitle has-text-white">
+            <p class="custom-p subtitle m-1 has-text-centered">
                 Proteins: ${ingredientProtein}g    
             </p>
-            <p class="subtitle has-text-white">
+            <p class="custom-p subtitle m-1 has-text-centered">
                 Fat: ${ingredientFat}g    
             </p>
-            <p class="subtitle has-text-white">
+            <p class="custom-p subtitle m-1 has-text-centered">
                 Carbs: ${ingredientCarbs}g    
             </p>
-            <p class="subtitle has-text-white">
+            <p class="custom-p subtitle m-1 has-text-centered">
                 Calories: ${ingredientCalories}g    
             </p>
-            <p class="subtitle has-text-white">
+            <p class="custom-p subtitle m-1 has-text-centered">
                 Fiber: ${ingredientFiber}g    
             </p>
             `;
