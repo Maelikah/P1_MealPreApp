@@ -4,6 +4,8 @@ var recipeAppKey = "7537eeca1e7b8144211802174e66b65a";
 var ingredientAppId = "92abae99";
 var ingredientAppKey = "3b826e041a1b3986fff646d47026e872";
 
+
+
 // Define global variables
 var ingredient = "";
 var mealType = "";
@@ -76,14 +78,55 @@ function renderPrevSearches() {
         storedRecipe.addEventListener("click", function(event) {
 
         event.preventDefault();
-        queryRecipeName = this.textContent;  // this is the value that will be used for the api call" 
-        
-        getRecipes(queryRecipeName);        // Call the function to get the recipes data
-
+        queryRecipeName = this.textContent;       // this is the value that will be used for the api call
+        getStoredRecipes(queryRecipeName);        // Call the function to get the recipes based on local storage data
         });
     });
     }
 }
 
+// getStoredRecipes(queryRecipeName) - Code for function that will fetch the recipe name stored in local storage
+
+function getStoredRecipes(queryRecipeName) {
+    var recipeUrl = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${recipeAppId}&app_key=${recipeAppKey}&q=${queryRecipeName}`;
+    var ingredientUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${ingredientAppI}d&app_key=${ingredientAppKey}&ingr=${ingredient}`;
+
+    fetch(recipeUrl)
+    
+        .then(function(response){
+            return response.json();
+        })
+
+        .then(function(data) {
+
+            var recipes = [];
+            if (data.hits) {
+                recipes = data.hits;
+            }
+
+            for (var i = 0; i < recipes.length; i++ ) {
+
+                var recipe = recipes[i].recipe;
+                console.log("Recipe Name: ", recipe.label);
+                console.log("Recipe URL: ", recipe.url);
+                console.log("Recipe Image: ", recipe.image);
+                console.log("Recipe Ingredients: ", recipe.ingredientLines.slice(0, 5));
+
+            }
+
+
+
+        })
+
+
+
+
+
+
+
+
+}
+
 
 // Event Listeners:
+

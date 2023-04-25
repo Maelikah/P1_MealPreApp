@@ -40,8 +40,12 @@ If you used any third-party assets that require attribution, list the creators w
 
 If you followed tutorials, include links to those here as well.
 
-
+- https://bulma.io/
+- https://developer.edamam.com/food-database-api-docs
+- https://developer.edamam.com/edamam-docs-recipe-api
+- https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 - https://encycolorpedia.com/
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 
 
 ## License
