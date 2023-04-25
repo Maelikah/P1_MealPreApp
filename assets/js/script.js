@@ -1,19 +1,29 @@
-// Define the variables needed for the Edamam Recipe API and for the Edamam Ingredients API requests as well as their API keys.
+// Define the variables needed for the Edamam Recipe API and for the Spoonacular API requests as well as their API keys.
 var recipeAppId = "1f6d88b8";
 var recipeAppKey = "7537eeca1e7b8144211802174e66b65a";
-var ingredientAppId = "92abae99";
-var ingredientAppKey = "3b826e041a1b3986fff646d47026e872";
-
-//TEST VAR DELETE
-var queryRecipeName = "Pan-Browned Brussel Sprouts"
+// var ingredientAppId = "92abae99";
+// var ingredientAppKey = "3b826e041a1b3986fff646d47026e872";
+var ingredientAppKey = "wv9E70dYQH5mLzitSnPYJbrYoM3dD3gq9d6CbewC";  // AppKey for USDA
 
 // Define global variables
 var ingredient = "";
 var mealType = "";
 var cuisineType = "";
 var consultedRecipes = [];
+var mainIngredient = "";  // variable used to store the mainIngredient fetched from the recipe search ingredients array
+
+//TEST VAR DELETE
+var queryRecipeName = "Pan-Browned Brussel Sprouts"
+//localStorage.setItem("consultedRecipes", "Pan-Browned Brussel Sprouts"); 
+consultedRecipes.push("Pan-Browned Brussel Sprouts");
+localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
+mainIngredient = "brussel sprout"
+
+
+
 
 // Define variables to traverse the DOM
+var mainModal = document.getElementById("mainModal");
 var previousSearchUl = document.getElementById("previousSearchUl");
 var recipeDiv = document.getElementById("recipeDiv");
 var recipeImageDiv = document.getElementById("recipeImageDiv");
@@ -43,6 +53,7 @@ function localStorePreviousSearches() {
 
 function init () {
 
+    mainModal.classList.add("is-active");
     var previousSearches = JSON.parse(localStorage.getItem("consultedRecipes"));
 
     if (previousSearches !== null) {
@@ -51,6 +62,7 @@ function init () {
         previousSearches.sort(); // Sort searches alphabetically
     }
 
+    
     clearRecipeData();      // Call function to delete content related to recipe data in the html 
     renderPrevSearches();   // Call function to create content related to previous searches stored in local storage
 }
@@ -71,7 +83,7 @@ function clearRecipeData() {
 
 function renderPrevSearches() {
 
-    previousSearchUl.innerHTML = "";
+    previousSearchUl.innerHTML = ""; // Clear contents for the previous Search list
 
     if (consultedRecipes == null) {
 
@@ -103,6 +115,7 @@ function renderPrevSearches() {
         event.preventDefault();
         queryRecipeName = this.textContent;       // this is the value that will be used for the api call
         getStoredRecipes(queryRecipeName);        // Call the function to get the recipes based on local storage data
+        mainModal.classList.remove("is-active");  // Switch from main modal to html page 
         });
     });
     }
@@ -111,8 +124,11 @@ function renderPrevSearches() {
 // getStoredRecipes(queryRecipeName) - Code for function that will fetch the recipe name stored in local storage
 
 function getStoredRecipes(queryRecipeName) {
+
+    // // Construct the Recipe Search API endpoint using the queryRecipeName value
     var recipeUrl = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${recipeAppId}&app_key=${recipeAppKey}&q=${queryRecipeName}`;
-    //var ingredientUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${ingredientAppI}d&app_key=${ingredientAppKey}&ingr=${ingredient}`;
+    
+    // // Fetch data from the Edamam Recipe Search API
 
     fetch(recipeUrl)
     
@@ -127,40 +143,109 @@ function getStoredRecipes(queryRecipeName) {
                 recipes = data.hits;
             }
             
-                var recipe = recipes[0].recipe;
-                console.log("Recipe Name: ", recipe.label);
-                console.log("Recipe URL: ", recipe.url);
-                console.log("Recipe Image: ", recipe.image);
-                console.log("Recipe Ingredients: ", recipe.ingredientLines.slice(0, 5));
-                console.log("Recipe Ingredients: ");
-                console.log("Recipe Main Ingredient: ", recipe.ingredients[0].food);
+            var recipe = recipes[0].recipe;
+            console.log("Recipe Name: ", recipe.label);
+            var recipeLabel = recipe.label
+            console.log("Recipe URL: ", recipe.url);
+            var recipeLink = recipe.url;
+            console.log("Recipe Image: ", recipe.image);
+            var recipeImage = recipe.image;
+            console.log("Recipe Ingredients: ", recipe.ingredientLines.slice(0, 5));
+            var recipeIngredients = recipe.ingredientLines.slice(0, 5);
+            console.log("Recipe Main Ingredient: ", recipe.ingredients[0].food);
+            mainIngredient = recipe.ingredients[0].food;
+            console.log ("mainIngredient variable is:" + mainIngredient);
+
+            // Add contents to the html page
+
+            recipeImageDiv.innerHTML = `
+            <img src="${recipeImage}">
+            `;
+
+            recipeNameDiv.innerHTML = `
+            <p class="title is-size-2 has-text-centered has-text-white p-2">${recipeLabel}</p>
+            `;
+
+            recipeIngredientsDiv.innerHTML = `
+            <p class="title is-size-4  has-text-white has-text-centered">Main Ingredients</p>
+            <p class="subtitle has-text-white">
+                <br>
+                ${recipeIngredients}                    
+            </p>
+            `;
+
+            recipeLinkDiv.innerHTML = `
+            <p class="title is-size-3 has-text-white  p-2">Preparation Instructions</p>
+            <button class="button is-white" onclick="window.open('${recipeLink}', '_blank')">Get Recipe</button>
+            `;
+        })
+        
+    // Construct the endpoint using the mainIngredient value. This endpoint will fetch the ingredient's nutritional facts from USDA. 
+    var ingredientUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${mainIngredient}&api_key=${ingredientAppKey}`;
+    
+
+    // Fetch data from the USDA API
+
+    fetch(ingredientUrl)
+
+        .then(function(response) {
+
+            return response.json();
+        })
+
+        .then(data => {
+            if (data.foods && data.foods.length > 0) {
+                // Extract nutrient information from the API response
+                var food = data.foods[0];
+                var nutrients = food.foodNutrients;
+                
+                // Access nutrient values as needed
+                var calories = nutrients.find(nutrient => nutrient.nutrientId === 1008)?.value || 0;
+                var protein = nutrients.find(nutrient => nutrient.nutrientId === 1003)?.value || 0;
+                var fat = nutrients.find(nutrient => nutrient.nutrientId === 1004)?.value || 0;
+                var carbohydrates = nutrients.find(nutrient => nutrient.nutrientId === 1005)?.value || 0;
+                var fiber = nutrients.find(nutrient => nutrient.nutrientId === 1079)?.value || 0;
+                
+                // Use the nutrient values in your code as needed
+                console.log('Calories: ', calories);
+                var ingredientCalories = calories;
+                console.log('Protein: ', protein);
+                var ingredientProtein = protein;
+                console.log('Fat: ', fat);
+                var ingredientFat = fat;
+                console.log('Carbohydrates: ', carbohydrates);
+                var ingredientCarbs = carbohydrates;
+                console.log('Fiber: ', fiber);
+                var ingredientFiber = fiber;
+            } else {
+                console.log('No nutrient data available for the given ingredient');
+            }
+
+            // Add contents to the html page
+
+            recipeFactsDiv.innerHTML = `
+            <p class="title is-size-4  has-text-white has-text-centered">Nutritional Facts</p>
+            <br>
+            <p class="subtitle has-text-white">
+                Proteins: ${ingredientProtein}g    
+            </p>
+            <p class="subtitle has-text-white">
+                Fat: ${ingredientFat}g    
+            </p>
+            <p class="subtitle has-text-white">
+                Carbs: ${ingredientCarbs}g    
+            </p>
+            <p class="subtitle has-text-white">
+                Calories: ${ingredientCalories}g    
+            </p>
+            <p class="subtitle has-text-white">
+                Fiber: ${ingredientFiber}g    
+            </p>
+            `;
         })
 }
 
 
 // Event Listeners:
 
-    //var recipeUrl = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${recipeAppId}&app_key=${recipeAppKey}&q=${queryRecipeName}`;
-    //var ingredientUrl = `https://api.edamam.com/api/food-database/v2/parser?app_id=${ingredientAppI}d&app_key=${ingredientAppKey}&ingr=${ingredient}`;
-
-    // fetch(recipeUrl)
     
-    //     .then(function(response){
-    //         return response.json();
-    //     })
-
-    //     .then(function(data) {
-
-    //         var recipes = [];
-    //         if (data.hits) {
-    //             recipes = data.hits;
-    //         }
-            
-    //             var recipe = recipes[0].recipe;
-    //             console.log("Recipe Name: ", recipe.label);
-    //             console.log("Recipe URL: ", recipe.url);
-    //             console.log("Recipe Image: ", recipe.image);
-    //             console.log("Recipe Ingredients: ", recipe.ingredientLines.slice(0, 5));
-    //             console.log("Recipe Ingredients: ");
-    //             console.log("Recipe Main Ingredient: ", recipe.ingredients[0].food);
-    //     })

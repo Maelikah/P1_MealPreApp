@@ -46,6 +46,7 @@ If you followed tutorials, include links to those here as well.
 - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API
 - https://encycolorpedia.com/
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
 
 
 ## License
