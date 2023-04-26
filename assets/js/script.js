@@ -17,10 +17,10 @@ var mainIngredient = "";  // variable used to store the mainIngredient fetched f
 // //localStorage.setItem("consultedRecipes", "Pan-Browned Brussel Sprouts"); 
 // consultedRecipes.push("Pan-Browned Brussel Sprouts");
 // localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
-mainIngredient = "brussel sprout"
-ingredient = "chicken";
-mealType = "lunch";
-cuisineType = "mexican";
+// mainIngredient = "brussel sprout"
+// ingredient = "chicken";
+// mealType = "lunch";
+// cuisineType = "mexican";
 
 
 
@@ -36,6 +36,12 @@ var recipeIngredientsDiv = document.getElementById("recipeIngredientsDiv");
 var recipeLinkDiv = document.getElementById("recipeLinkDiv");
 var recipeFactsDiv = document.getElementById("recipeFactsDiv");
 var recipeListUl = document.getElementById("recipeListUl");
+var ingredientSelect = document.getElementById("ingredientSelect");
+var cuisineSelect = document.getElementById("cuisineSelect");
+var mealSelect = document.getElementById("mealSelect");
+var querySubmit = document.getElementById("querySubmit");
+var warningModal = document.getElementById("warningModal");
+
 
 // List functions to execute: 
 
@@ -326,9 +332,54 @@ function getRecipesList() {
 }
 
 
-
-
-
-
 // Event Listeners:
 
+// Ingredient Dropdown List Event Listener
+
+ingredientSelect.addEventListener("change", function(event) {
+
+    ingredient = event.target.value;
+    console.log(ingredient);
+});
+
+// Cuisine Dropdown List Event Listener
+cuisineSelect.addEventListener("change", function(event) {
+
+    cuisineType = event.target.value;
+});
+
+// Meal Dropdown List Event Listener
+mealSelect.addEventListener("change", function(event) {
+
+    mealType = event.target.value;
+});
+
+// Get me some recipes button Event Listener
+
+querySubmit.addEventListener("click", function (event) {
+    event.preventDefault();
+    
+    // Check if any of the select elements are null or undefined
+
+    if (!ingredient || !cuisineType || !mealType) {
+        // Show the warning modal
+        warningModal.className = "modal is-active";
+        warningModal.querySelector(".modal-background").addEventListener("click", function() {
+        warningModal.className = "modal";
+        });
+        warningModal.querySelector(".modal-close").addEventListener("click", function () {
+            warningModal.className = "modal";
+            event.stopPropagation();
+        });
+
+    } else {
+        // All select elements are selected, proceed with getting recipes
+        console.log("User can search for recipes when clicking")
+
+
+        // mainModal.classList.remove("is-active");
+        // loadingModal.classList.add("is-active");
+        // getRecipesList();
+    }
+
+});
