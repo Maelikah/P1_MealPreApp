@@ -17,10 +17,10 @@ var mainIngredient = "";  // variable used to store the mainIngredient fetched f
 // //localStorage.setItem("consultedRecipes", "Pan-Browned Brussel Sprouts"); 
 // consultedRecipes.push("Pan-Browned Brussel Sprouts");
 // localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
-mainIngredient = "brussel sprout"
-ingredient = "chicken";
-mealType = "lunch";
-cuisineType = "mexican";
+// mainIngredient = "brussel sprout"
+// ingredient = "chicken";
+// mealType = "lunch";
+// cuisineType = "mexican";
 
 
 
@@ -36,6 +36,16 @@ var recipeIngredientsDiv = document.getElementById("recipeIngredientsDiv");
 var recipeLinkDiv = document.getElementById("recipeLinkDiv");
 var recipeFactsDiv = document.getElementById("recipeFactsDiv");
 var recipeListUl = document.getElementById("recipeListUl");
+var ingredientSelect = document.getElementById("ingredientSelect");
+var cuisineSelect = document.getElementById("cuisineSelect");
+var mealSelect = document.getElementById("mealSelect");
+var querySubmit = document.getElementById("querySubmit");
+var warningModal = document.getElementById("warningModal");
+var recipeListCancelBtn = document.getElementById("recipeListCancelBtn");
+var backBtn = document.getElementById("backBtn");
+var backtoMainBtn = document.getElementById("backtoMainBtn");
+var clearLocalStorage = document.getElementById("clearLocalStorage");
+
 
 // List functions to execute: 
 
@@ -68,7 +78,7 @@ function init () {
     }
 
     
-  //  clearRecipeData();      // Call function to delete content related to recipe data in the html 
+    clearRecipeData();      // Call function to delete content related to recipe data in the html 
     renderPrevSearches();   // Call function to create content related to previous searches stored in local storage
 }
 
@@ -123,10 +133,10 @@ function renderPrevSearches() {
         mainModal.classList.remove("is-active");  // Switch from main modal to loading page
         loadingModal.classList.add("is-active");  // Activate loading modal page
 
-        // Set a timeout of 5 seconds (5000 milliseconds)
+        // Set a timeout of 6 seconds (6000 milliseconds)
         setTimeout(function() {
             loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal
-        }, 5000);
+        }, 6000);
         });
     });
     }
@@ -261,6 +271,7 @@ function getStoredRecipes(queryRecipeName) {
 
 function getRecipesList() {
 
+    
     recipeListUl.innerHTML = ""; // Clear contents for the previous Search list
 
 
@@ -315,10 +326,10 @@ function getRecipesList() {
                 recipeListModal.classList.remove("is-active");  // Switch from recipe list modal to loading modal
                 loadingModal.classList.add("is-active");        // Activate loading modal
                 
-                // Set a timeout of 5 seconds (5000 milliseconds)
+                // Set a timeout of 6 seconds (6000 milliseconds)
                 setTimeout(function() {
                 loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal sending the user to the html page
-                }, 5000);
+                }, 6000);
 
                 });
             });
@@ -326,9 +337,85 @@ function getRecipesList() {
 }
 
 
-
-
-
-
 // Event Listeners:
 
+// Ingredient Dropdown List Event Listener
+
+ingredientSelect.addEventListener("change", function(event) {
+
+    ingredient = event.target.value;
+    console.log(ingredient);
+});
+
+// Cuisine Dropdown List Event Listener
+cuisineSelect.addEventListener("change", function(event) {
+
+    cuisineType = event.target.value;
+});
+
+// Meal Dropdown List Event Listener
+mealSelect.addEventListener("change", function(event) {
+
+    mealType = event.target.value;
+});
+
+// Get me some recipes button Event Listener
+
+querySubmit.addEventListener("click", function (event) {
+    event.preventDefault();
+    
+    // Check if any of the select elements are null or undefined
+
+    if (!ingredient || !cuisineType || !mealType) {
+        // Show the warning modal
+        warningModal.className = "modal is-active";
+        warningModal.querySelector(".modal-background").addEventListener("click", function() {
+        warningModal.className = "modal";
+        });
+        warningModal.querySelector(".modal-close").addEventListener("click", function () {
+            warningModal.className = "modal";
+            event.stopPropagation();
+        });
+
+    } else {
+        // All select elements are selected, proceed with getting recipes
+        console.log("User can search for recipes when clicking")
+        event.preventDefault();
+        getRecipesList();
+        mainModal.classList.remove("is-active");  // Switch from main modal to loading page
+        loadingModal.classList.add("is-active");  // Activate loading modal page
+
+        // Set a timeout of 6 seconds (6000 milliseconds)
+        setTimeout(function() {
+            loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal
+            recipeListModal.classList.add("is-active");
+        }, 6000);
+    }
+});
+
+
+// Cancel button event listener
+
+recipeListCancelBtn.addEventListener("click", function() {
+    mainModal.classList.add("is-active");
+})
+
+// Back to main event listener
+
+backtoMainBtn.addEventListener("click", function() {
+    mainModal.classList.add("is-active");
+})
+
+
+// Clear previous recipes list
+
+clearLocalStorage.addEventListener ("click", function() {
+    previousSearchUl.innerHTML = "";
+    localStorage.clear();
+})
+
+// Back to list button event listener
+
+backBtn.addEventListener("click", function() {
+    recipeListModal.classList.add("is-active");
+})
