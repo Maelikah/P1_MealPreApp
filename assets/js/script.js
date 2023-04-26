@@ -13,10 +13,10 @@ var consultedRecipes = [];
 var mainIngredient = "";  // variable used to store the mainIngredient fetched from the recipe search ingredients array
 
 //TEST VAR DELETE
-var queryRecipeName = "Pan-Browned Brussel Sprouts"
-//localStorage.setItem("consultedRecipes", "Pan-Browned Brussel Sprouts"); 
-consultedRecipes.push("Pan-Browned Brussel Sprouts");
-localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
+// var queryRecipeName = "Pan-Browned Brussel Sprouts"
+// //localStorage.setItem("consultedRecipes", "Pan-Browned Brussel Sprouts"); 
+// consultedRecipes.push("Pan-Browned Brussel Sprouts");
+// localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
 mainIngredient = "brussel sprout"
 ingredient = "chicken";
 mealType = "lunch";
@@ -120,7 +120,13 @@ function renderPrevSearches() {
         event.preventDefault();
         queryRecipeName = this.textContent;       // this is the value that will be used for the api call
         getStoredRecipes(queryRecipeName);        // Call the function to get the recipes based on local storage data
-        mainModal.classList.remove("is-active");  // Switch from main modal to html page 
+        mainModal.classList.remove("is-active");  // Switch from main modal to loading page
+        loadingModal.classList.add("is-active");  // Activate loading modal page
+
+        // Set a timeout of 5 seconds (5000 milliseconds)
+        setTimeout(function() {
+            loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal
+        }, 5000);
         });
     });
     }
@@ -290,6 +296,32 @@ function getRecipesList() {
                 recipeLi.appendChild(liInnerDiv);                                       // Append the div element to the li element
                 recipeListUl.appendChild(recipeLi);                                 // Append the li element to the ul element
             }
+
+            // Attach event listener to ".recipeListLi" elements after they have been created
+
+            var listedRecipes = document.querySelectorAll(".recipeListLi");
+
+            listedRecipes.forEach(function(listedRecipe) {
+
+                listedRecipe.addEventListener("click", function(event) {
+
+                event.preventDefault();
+                queryRecipeName = this.textContent;       // this is the value that will be used for the api call
+                
+                consultedRecipes.push(queryRecipeName);
+                localStorePreviousSearches();             // Call the function to store selected recipe to the local storage
+                
+                getStoredRecipes(queryRecipeName);        // Call the function to get the recipes based on user selection
+                recipeListModal.classList.remove("is-active");  // Switch from recipe list modal to loading modal
+                loadingModal.classList.add("is-active");        // Activate loading modal
+                
+                // Set a timeout of 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal sending the user to the html page
+                }, 5000);
+
+                });
+            });
         })
 }
 
@@ -300,4 +332,66 @@ function getRecipesList() {
 
 // Event Listeners:
 
+mainModal.classList.remove("is-active");
+recipeListModal.classList.add("is-active");
+recipeListUl.innerHTML = ""; // Clear contents for the previous Search list
+
+
+    // // Construct the Recipe Search API endpoint using the values input by the user value
+    var recipeUrl = `https://api.edamam.com/api/recipes/v2?type=public&app_id=${recipeAppId}&app_key=${recipeAppKey}&q=${ingredient}&mealType=${mealType}&cuisineType=${cuisineType}`;
     
+    // // Fetch data from the Edamam Recipe Search API
+
+    fetch(recipeUrl)
+    
+        .then(function(response){
+            return response.json();
+        })
+
+        .then(function(data) {
+
+            var recipes = [];
+            if (data.hits) {
+                recipes = data.hits;
+            }
+
+            
+            for (var i = 0; i < 10; i++) {
+                var recipe = recipes[i].recipe;
+                console.log("Recipe Name: ", recipe.label);
+                var recipeName = recipe.label;
+                // Add contents to the html page
+                var recipeLi = document.createElement("li");                            // Create a new li element
+                recipeLi.className = "recipeListLi";                                // Set the class for the li element
+                var liInnerDiv = document.createElement("div");                         // Create a new div element
+                liInnerDiv.className = "custom-column column is-narrow box mt-1 mb-1";  // Set the classes for the div element
+                liInnerDiv.textContent = recipeName;
+                recipeLi.appendChild(liInnerDiv);                                       // Append the div element to the li element
+                recipeListUl.appendChild(recipeLi);                                 // Append the li element to the ul element
+            }
+
+            // Attach event listener to ".recipeListLi" elements after they have been created
+
+            var listedRecipes = document.querySelectorAll(".recipeListLi");
+
+            listedRecipes.forEach(function(listedRecipe) {
+
+                listedRecipe.addEventListener("click", function(event) {
+
+                event.preventDefault();
+                queryRecipeName = this.textContent;       // this is the value that will be used for the api call
+                consultedRecipes.push(queryRecipeName);                
+                localStorePreviousSearches(queryRecipeName);             // Call the function to store selected recipe to the local storage
+                
+                getStoredRecipes(queryRecipeName);        // Call the function to get the recipes based on user selection
+                recipeListModal.classList.remove("is-active");  // Switch from recipe list modal to loading modal
+                loadingModal.classList.add("is-active");        // Activate loading modal
+                
+                // Set a timeout of 5 seconds (5000 milliseconds)
+                setTimeout(function() {
+                loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal sending the user to the html page
+                }, 5000);
+
+                });
+            });
+        })
