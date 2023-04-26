@@ -4,22 +4,25 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Meal PreApp - Recipe Search App</title>
+        <!-- bulma css framework to give style and make it responsive  -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Hammersmith+One&family=Lilita+One&family=Ysabeau&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="/assets/css/style.css" />
+        <link rel="stylesheet" href="./assets/css/style.css" />
     </head>
+
     <body class="has-background-warning-light">
+        <!-- main header -->
         <header class=" custom-hnfBgc section has-text-centered ">
             <h1 class="is-size-1 custom-hnf title has-text-white">
                 MealPreApp
             </h1>
         </header>
+ 
         <div id="recipeDiv" class="tile is-ancestor">
             <div class="tile is-parent mt-5 m-3">
-                <article class="tile is-child box has-background-warning ">
-                    
+                <article class="tile is-child box has-background-warning ">  
                     <figure id="recipeImageDiv" class="image ">
                     <img src="https://i1.wp.com/static.flickr.com/109/315912786_faddcc36ec_z.jpg?w=640">
                     </figure>
@@ -36,6 +39,7 @@
                                 <p class="title is-size-2 has-text-centered has-text-white p-2">Pan-Browned Brussel Sprouts</p>
                                 </div>
                             </article>
+
                             <article class="tile is-child box has-background-info">
                                 <div id="recipeIngredientsDiv" class="has-background-dark box">
                                     <p class="title is-size-4  has-text-white has-text-centered">Main Ingredients</p>
@@ -46,8 +50,7 @@
                                         1 1/2 tbsp unsalted butter <br>
                                         1 tbsp Olive Oil <br>
                                         2 tbsp Pine nut <br>
-                                    </p>
-                                    
+                                    </p>        
                                 </div>
                             </article>
                             <br>
@@ -104,7 +107,6 @@
 
 
         <!-- Modal that serves as main page -->
-
         <div id="mainModal" class="modal is-active ">
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
@@ -115,7 +117,8 @@
                     <section class="modal-card-body has-background-warning-light">
                         <div class="has-text-centered">
                             <br>
-                            <img src="/assets/images/logo.png" alt="Logo" width="256" height="256">
+                            <!-- file path upgraded  -->
+                            <img src="./assets/images/logo.png" alt="Logo" width="256" height="256">
                         </div>
                         <div class="has-text-centered">
                             <br>
@@ -123,6 +126,7 @@
                             <p class="subtitle is-6 has-text-centered"> Please select your ingredient, cuisine and meal type requirements and MealPreApp will provide you with the best recipes matching your requirements </p>
                             <br>
                         </div>
+                        <!-- this first dropdown allows the user to choose their main ingredient -->
                         <div class="custom-dropdowns has-text-centered">
                             <div class="columns is-multiline">
                                 <div class="column is-4">
@@ -140,6 +144,7 @@
                                         </select>
                                     </div>
                                 </div>
+                                <!-- second dropdown allows the user to choose the cuisine type -->
                                 <div class="column is-4">
                                     <label for="cuisineSelect" class="label has-text-weight-bold">Cuisine Type</label>
                                     <div class="select">
@@ -159,7 +164,10 @@
                                     </div>
                                 </div>
                                 <div class="column is-4">
-                                    <label for="mealSelect" class="label has-text-weight-bold">Meal Type</label>
+
+                                <!-- dropdown for choosing the type of meal the would like to  -->
+                                    <label for="meal-select" class="label has-text-weight-bold">Meal Type</label>
+
                                     <div class="select">
                                         <select id="mealSelect">
                                             <option value="" selected disabled>Choose an option</option>
@@ -203,16 +211,24 @@
                         </section>
                         
                     </section>
+
                     <footer class="custom-modalBgc modal-card-foot is-flex justify-content-center">
+
                     <button id="clearLocalStorage" class="custom-button button mx-auto is-rounded is-bordered has-text-white">Clear previous recipes</button>
                     <button id="querySubmit" class="custom-button button is-rounded mx-auto has-text-white is-bordered">Get me some recipes</button>   
+
+                    <!-- buttons for clearing previous recipes and get more recipes -->
+                    <button class="custom-button button mx-auto  is-bordered">Clear previous recipes</button>
+                    <button class="custom-button button mx-auto  is-bordered">Get me some recipes</button>   
+
                     </footer>
                 </div>
             </div>
         </div>
 
         <!-- Modal that serves as loading page -->
-        <div id="loadingModal" class="modal ">
+        <!-- This loading page will appear to the user while searching for the best recipes -->
+        <div id="loadingModal" class="modal is-active">
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
                 <div class="modal-card">
@@ -222,7 +238,8 @@
                     <section class="modal-card-body has-background-warning-light">
                         <div class="has-text-centered">
                             <br>
-                            <img src="/assets/images/loading.gif" alt="Logo" width="256" height="256">
+                            <!-- this file is upgraded and present no errors -->
+                            <img src="./assets/images/loading.gif" alt="Logo" width="256" height="256">
                             <br>
                             <br>
                             <br>
@@ -236,8 +253,8 @@
         </div>
 
         <!-- Modal that serves as recipe list page -->
-
-        <div id="recipeListModal" class="modal ">
+        <!-- this modal will be display when the recipies according to the user choices are ready  -->
+        <div id="recipeListModal" class="modal is-active">
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
                 <div class="modal-card">
@@ -247,7 +264,7 @@
                     <section class="modal-card-body has-background-warning-light">
                         <div class="has-text-centered">
                             <br>
-                            <img src="/assets/images/logo.png" alt="Logo" width="256" height="256">
+                            <img src="./assets/images/logo.png" alt="Logo" width="256" height="256">
                         </div>
                         <div class="has-text-centered">
                             <br>
@@ -289,6 +306,7 @@
                     </footer>
                 </div>
             </div>
+
         </div>
         
         <!-- Modal HTML for warning modal -->
@@ -303,5 +321,11 @@
         </div>
 
     <script src="./assets/js/script.js"></script>
+
+        </div>   
+   
+        <!-- js files linked -->
+        <script src="./assets/js/script.js"></script>
+
     </body>
 </html>
