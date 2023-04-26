@@ -41,6 +41,10 @@ var cuisineSelect = document.getElementById("cuisineSelect");
 var mealSelect = document.getElementById("mealSelect");
 var querySubmit = document.getElementById("querySubmit");
 var warningModal = document.getElementById("warningModal");
+var recipeListCancelBtn = document.getElementById("recipeListCancelBtn");
+var backBtn = document.getElementById("backBtn");
+var backtoMainBtn = document.getElementById("backtoMainBtn");
+var clearLocalStorage = document.getElementById("clearLocalStorage");
 
 
 // List functions to execute: 
@@ -74,7 +78,7 @@ function init () {
     }
 
     
-  //  clearRecipeData();      // Call function to delete content related to recipe data in the html 
+    clearRecipeData();      // Call function to delete content related to recipe data in the html 
     renderPrevSearches();   // Call function to create content related to previous searches stored in local storage
 }
 
@@ -129,10 +133,10 @@ function renderPrevSearches() {
         mainModal.classList.remove("is-active");  // Switch from main modal to loading page
         loadingModal.classList.add("is-active");  // Activate loading modal page
 
-        // Set a timeout of 5 seconds (5000 milliseconds)
+        // Set a timeout of 6 seconds (6000 milliseconds)
         setTimeout(function() {
             loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal
-        }, 5000);
+        }, 6000);
         });
     });
     }
@@ -267,6 +271,7 @@ function getStoredRecipes(queryRecipeName) {
 
 function getRecipesList() {
 
+    
     recipeListUl.innerHTML = ""; // Clear contents for the previous Search list
 
 
@@ -321,10 +326,10 @@ function getRecipesList() {
                 recipeListModal.classList.remove("is-active");  // Switch from recipe list modal to loading modal
                 loadingModal.classList.add("is-active");        // Activate loading modal
                 
-                // Set a timeout of 5 seconds (5000 milliseconds)
+                // Set a timeout of 6 seconds (6000 milliseconds)
                 setTimeout(function() {
                 loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal sending the user to the html page
-                }, 5000);
+                }, 6000);
 
                 });
             });
@@ -375,11 +380,42 @@ querySubmit.addEventListener("click", function (event) {
     } else {
         // All select elements are selected, proceed with getting recipes
         console.log("User can search for recipes when clicking")
+        event.preventDefault();
+        getRecipesList();
+        mainModal.classList.remove("is-active");  // Switch from main modal to loading page
+        loadingModal.classList.add("is-active");  // Activate loading modal page
 
-
-        // mainModal.classList.remove("is-active");
-        // loadingModal.classList.add("is-active");
-        // getRecipesList();
+        // Set a timeout of 6 seconds (6000 milliseconds)
+        setTimeout(function() {
+            loadingModal.classList.remove("is-active");  // Remove is-active class from loadingModal
+            recipeListModal.classList.add("is-active");
+        }, 6000);
     }
-
 });
+
+
+// Cancel button event listener
+
+recipeListCancelBtn.addEventListener("click", function() {
+    mainModal.classList.add("is-active");
+})
+
+// Back to main event listener
+
+backtoMainBtn.addEventListener("click", function() {
+    mainModal.classList.add("is-active");
+})
+
+
+// Clear previous recipes list
+
+clearLocalStorage.addEventListener ("click", function() {
+    previousSearchUl.innerHTML = "";
+    localStorage.clear();
+})
+
+// Back to list button event listener
+
+backBtn.addEventListener("click", function() {
+    recipeListModal.classList.add("is-active");
+})
