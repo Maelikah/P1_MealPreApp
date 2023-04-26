@@ -47,7 +47,6 @@ body {
     color: white;
     border: 2px solid darkgoldenrod;
     font-family: 'Hammersmith One', sans-serif;
-    
 }
 
 .custom-button:hover {
@@ -63,5 +62,17 @@ body {
 .previousSearchLi {
     display: inline-block;
     padding-block: 5px;
+    
+}
+
+.custom-p {
+    
+    border-radius: 5px;
+    padding: 3px;
+    margin-bottom: 1rem;
+    border: 1px solid black;
+    color: black;
+    list-style: none;
+    background-color: var(--bodybgc)
     
 }
