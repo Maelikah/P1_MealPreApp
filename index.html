@@ -98,7 +98,7 @@
 
 
         <!-- Modal that serves as main page -->
-        <div id="mainModal" class="modal is-active ">
+        <div id="mainModal" class="modal">
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
                 <div class="modal-card">
@@ -132,18 +132,9 @@
                                 <!-- Container for ingredient selection dropdown -->
                                 <div class="column is-4">
                                     <!-- Ingredient dropdown list contents -->
-                                    <label for="ingredientSelect" class="label has-text-weight-bold">Ingredient</label>
-                                    <div class="select">
-                                        <select id="ingredientSelect">
-                                            <option value="" selected disabled>Choose an option</option>
-                                            <option>Beef</option>
-                                            <option>Chicken</option>
-                                            <option>Fruits</option>
-                                            <option>Pasta</option>
-                                            <option>Pork</option>
-                                            <option>Seafood</option>
-                                            <option>Vegetables</option>
-                                        </select>
+                                    <label class="label has-text-weight-bold">Ingredient</label>
+                                    <div class="control">
+                                        <input class="input" type="text" id="ingredientSelect" placeholder="Enter an ingredient">
                                     </div>
                                 </div>
 

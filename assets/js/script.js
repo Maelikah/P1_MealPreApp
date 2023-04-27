@@ -1,6 +1,6 @@
-// Define the variables needed for the Edamam Recipe API and for the Spoonacular API requests as well as their API keys.
-var recipeAppId = "1f6d88b8";
-var recipeAppKey = "7537eeca1e7b8144211802174e66b65a";
+// Define the variables needed for API requirements.
+var recipeAppId = "1f6d88b8";                                       // AppID for Edamam
+var recipeAppKey = "7537eeca1e7b8144211802174e66b65a";              // AppKey for Edamam
 var ingredientAppKey = "wv9E70dYQH5mLzitSnPYJbrYoM3dD3gq9d6CbewC";  // AppKey for USDA
 
 // Define global variables
@@ -8,18 +8,6 @@ var ingredient = "";
 var mealType = "";
 var cuisineType = "";
 var consultedRecipes = [];
-var mainIngredient = "";  // variable used to store the mainIngredient fetched from the recipe search ingredients array
-
-//TEST VAR DELETE
-// var queryRecipeName = "Pan-Browned Brussel Sprouts"
-// //localStorage.setItem("consultedRecipes", "Pan-Browned Brussel Sprouts"); 
-// consultedRecipes.push("Pan-Browned Brussel Sprouts");
-// localStorage.setItem("consultedRecipes", JSON.stringify(consultedRecipes));
-// mainIngredient = "brussel sprout"
-// ingredient = "chicken";
-// mealType = "lunch";
-// cuisineType = "mexican";
-
 
 
 // Define variables to traverse the DOM
@@ -49,9 +37,6 @@ var clearLocalStorage = document.getElementById("clearLocalStorage");
 
 init ();                    // Call function that loads previous searches  
 
-
-
-
 // Functions: 
 
 // localStorePreviousSearches() - Code for funtion that will store input data inside the cities array into the local storage
@@ -66,7 +51,7 @@ function localStorePreviousSearches() {
 
 function init () {
 
-   // mainModal.classList.add("is-active");
+    mainModal.classList.add("is-active");
     var previousSearches = JSON.parse(localStorage.getItem("consultedRecipes"));
 
     if (previousSearches !== null) {
@@ -127,9 +112,11 @@ function renderPrevSearches() {
 
         event.preventDefault();
         queryRecipeName = this.textContent;       // this is the value that will be used for the api call
+        ingredient = "chicken";
         getStoredRecipes(queryRecipeName);        // Call the function to get the recipes based on local storage data
         mainModal.classList.remove("is-active");  // Switch from main modal to loading page
         loadingModal.classList.add("is-active");  // Activate loading modal page
+        backBtn.style.display = "none" 
 
         // Set a timeout of 6 seconds (6000 milliseconds)
         setTimeout(function() {
@@ -171,9 +158,7 @@ function getStoredRecipes(queryRecipeName) {
             var recipeImage = recipe.image;
             console.log("Recipe Ingredients: ", recipe.ingredientLines.slice(0, 5));
             var recipeIngredients = recipe.ingredientLines.slice(0, 5);
-            console.log("Recipe Main Ingredient: ", recipe.ingredients[0].food);
-            mainIngredient = recipe.ingredients[0].food;
-            console.log ("mainIngredient variable is:" + mainIngredient);
+           // console.log("Recipe Main Ingredient: ", recipe.ingredients[0].food);
 
             // Add contents to the html page
 
@@ -199,8 +184,9 @@ function getStoredRecipes(queryRecipeName) {
             `;
         })
         
-    // Construct the endpoint using the mainIngredient value. This endpoint will fetch the ingredient's nutritional facts from USDA. 
-    var ingredientUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${mainIngredient}&api_key=${ingredientAppKey}`;
+    // Construct the endpoint using the main Ingredient value. This endpoint will fetch the ingredient's nutritional facts from USDA. 
+    console.log(ingredient)
+    var ingredientUrl = `https://api.nal.usda.gov/fdc/v1/foods/search?query=${ingredient}&api_key=${ingredientAppKey}`;
     
 
     // Fetch data from the USDA API
@@ -292,7 +278,7 @@ function getRecipesList() {
             }
 
             
-            for (var i = 0; i < 10; i++) {
+            for (var i = 0; i < recipes.length; i++) {
                 var recipe = recipes[i].recipe;
                 console.log("Recipe Name: ", recipe.label);
                 var recipeName = recipe.label;
@@ -333,6 +319,18 @@ function getRecipesList() {
             });
         })
 }
+
+
+// Local Storage Button display behaviour
+
+    if (!localStorage.getItem("consultedRecipes")) {
+
+        clearLocalStorage.style.display = "none"
+
+    } else {
+
+        clearLocalStorage.style.display = "block"
+    }
 
 
 // Event Listeners:
@@ -395,21 +393,23 @@ querySubmit.addEventListener("click", function (event) {
 // Cancel button event listener
 
 recipeListCancelBtn.addEventListener("click", function() {
-    mainModal.classList.add("is-active");
+    location.reload(true);
 })
 
 // Back to main event listener
 
 backtoMainBtn.addEventListener("click", function() {
-    mainModal.classList.add("is-active");
+   
+    location.reload(true);
 })
 
 
-// Clear previous recipes list
+// Clear previous recipes list event listener
 
 clearLocalStorage.addEventListener ("click", function() {
     previousSearchUl.innerHTML = "";
     localStorage.clear();
+    location.reload(true);
 })
 
 // Back to list button event listener
