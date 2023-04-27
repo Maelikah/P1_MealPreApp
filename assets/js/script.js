@@ -1,8 +1,6 @@
 // Define the variables needed for the Edamam Recipe API and for the Spoonacular API requests as well as their API keys.
 var recipeAppId = "1f6d88b8";
 var recipeAppKey = "7537eeca1e7b8144211802174e66b65a";
-// var ingredientAppId = "92abae99";
-// var ingredientAppKey = "3b826e041a1b3986fff646d47026e872";
 var ingredientAppKey = "wv9E70dYQH5mLzitSnPYJbrYoM3dD3gq9d6CbewC";  // AppKey for USDA
 
 // Define global variables

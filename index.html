@@ -1,105 +1,96 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Meal PreApp - Recipe Search App</title>
-        <!-- bulma css framework to give style and make it responsive  -->
+
+        <!-- Bulma css framework to give style and make it responsive  -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+        <!-- Google fonts  -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Chilanka&family=Hammersmith+One&family=Lilita+One&family=Ysabeau&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./assets/css/style.css" />
+        
+        <!-- Custom stylesheet  -->
+        <link rel="stylesheet" href="/assets/css/style.css" />
     </head>
 
     <body class="has-background-warning-light">
-        <!-- main header -->
+
+        <!-- Page header -->
         <header class=" custom-hnfBgc section has-text-centered ">
             <h1 class="is-size-1 custom-hnf title has-text-white">
                 MealPreApp
             </h1>
         </header>
- 
+
+        <!-- Main container that will store recipe data   -->
         <div id="recipeDiv" class="tile is-ancestor">
+            <!-- Container for recipe image  -->
             <div class="tile is-parent mt-5 m-3">
-                <article class="tile is-child box has-background-warning ">  
+                <section class="tile is-child box has-background-warning ">
+                    <!-- Container that will hold the actual image through dynamic content creation using the id in javascript  -->
                     <figure id="recipeImageDiv" class="image ">
-                    <img src="https://i1.wp.com/static.flickr.com/109/315912786_faddcc36ec_z.jpg?w=640">
+                    
                     </figure>
-                </article>
+                </section>
             </div>
             
+            <!-- Container for recipe information tiles  -->
             <div class="tile is-parent mt-5 m-3">
             <article class="tile is-child box has-background-warning">
                 <div class="tile is-vertical is-12 ">
                     <div class="tile ">
+                        <!-- Container that will hold the first two vertical tiles   -->
                         <div class="tile is-parent is-vertical ">
-                            <article class="tile is-child box has-background-info">
-                                <div id="recipeNameDiv" class="has-background-dark box ">
-                                <p class="title is-size-2 has-text-centered has-text-white p-2">Pan-Browned Brussel Sprouts</p>
-                                </div>
-                            </article>
-
-                            <article class="tile is-child box has-background-info">
-                                <div id="recipeIngredientsDiv" class="has-background-dark box">
-                                    <p class="title is-size-4  has-text-white has-text-centered">Main Ingredients</p>
-                                    <p class="custom-p subtitle m-1 has-text-centered ">
-                                        <br>
-                                        1/2 lb Brussel Sprouts <br>
-                                        2 large garlic cloves <br>
-                                        1 1/2 tbsp unsalted butter <br>
-                                        1 tbsp Olive Oil <br>
-                                        2 tbsp Pine nut <br>
-                                    </p>        
-                                </div>
-                            </article>
-                            <br>
                             
-                        </div>
-                        <div class="tile is-parent is-vertical">
-                            <article class="tile is-child box has-text-centered has-background-info">
-                                <div id="recipeLinkDiv" class="has-background-dark box">
-                                <p class="title is-size-3 has-text-white  p-2">Preparation Instructions</p>
-                                <button class="button is-white">Get Recipe</button>
+                            <!-- Container for recipe name  -->
+                            <section class="tile is-child box has-background-info">
+                                <!-- Container that will hold the actual recipe name through dynamic content creation using the id in javascript  -->
+                                <div id="recipeNameDiv" class="has-background-dark box ">
+                                
                                 </div>
-                            </article>
+                            </section>
+
+                            <!-- Container for recipe ingredients list  -->
+                            <section class="tile is-child box has-background-info">
+                                <!-- Container that will hold the actual inredients list through dynamic content creation using the id in javascript  -->
+                                <div id="recipeIngredientsDiv" class="has-background-dark box">
+                                    
+                                </div>
+                            </section>
                             <br>
-                            <article class="tile is-child box has-background-info">
+                        </div>
+
+                        <!-- Container that will the second two vertical tiles -->
+                        <div class="tile is-parent is-vertical">
+
+                            <!-- Container for preparation instructions  -->
+                            <section class="tile is-child box has-text-centered has-background-info">
+                                <!-- Container that will hold the actual instructions link through dynamic content creation using the id in javascript  -->
+                                <div id="recipeLinkDiv" class="has-background-dark box">
+                                
+                                </div>
+                            </section>
+                            <br>
+
+                            <!-- Container for nutritional facts  -->
+                            <section class="tile is-child box has-background-info">
+                                <!-- Container that will hold the actual nutritional facts through dynamic content creation using the id in javascript  -->
                                 <div id="recipeFactsDiv" class="has-background-dark box ">
-                                    <p class="title is-size-4  has-text-white has-text-centered ">Nutritional Facts</p>
-                                    
-                                        <p class="custom-p subtitle m-1 has-text-centered  ">
-                                            
-                                            Proteins: 5g
-                                        </p>
-                                        <p class="custom-p subtitle m-1 has-text-centered">
-                                            
-                                            Fat: 5g
-                                        </p>
-                                        <p class="custom-p subtitle m-1 has-text-centered">
-                                            
-                                            Carbs: 5g
-                                        </p>
-                                        <p class="custom-p subtitle m-1 has-text-centered">
-                                            
-                                            Calories: 5g
-                                        </p>
-                                        <p class="custom-p subtitle m-1 has-text-centered">
-                                            
-                                            Fiber: 5g
-                                        </p>
-                                    
-                                    
-                                    
                                     
                                 </div>
-                            </article>
+                            </section>
                             <br>
                         </div>
             </article>
             </div>
         </div>
         
+        <!-- Page footer  -->
         <footer class=" custom-hnfBgc section has-text-centered mt-auto ">
             <button id="backBtn" class="custom-button button mx-auto has-text-white is-rounded is-bordered">Back to list</button>
             <button id="backtoMainBtn" class="custom-button button mx-auto has-text-white is-rounded is-bordered">Back to main </button>
@@ -111,25 +102,36 @@
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
                 <div class="modal-card">
+
+                    <!-- Main Modal header    -->
                     <header class="custom-hnf custom-modalBgc modal-card-head has-text-centered">
                     <p class="modal-card-title has-text-white is-size-1">MealPreApp </p>
                     </header>
-                    <section class="modal-card-body has-background-warning-light">
-                        <div class="has-text-centered">
+
+                    <!-- Main Modal Contents container  -->
+                    <article class="modal-card-body has-background-warning-light">
+
+                        <!-- Logo container  -->
+                        <section class="has-text-centered">
                             <br>
-                            <!-- file path upgraded  -->
-                            <img src="./assets/images/logo.png" alt="Logo" width="256" height="256">
-                        </div>
-                        <div class="has-text-centered">
+                            <img src="/assets/images/logo.png" alt="Logo" width="256" height="256">
+                        </section>
+
+                        <!-- Text container  -->
+                        <section class="has-text-centered">
                             <br>
                             <p class="subtitle is-5">Getting cooking recipes has never been easier!</p>
                             <p class="subtitle is-6 has-text-centered"> Please select your ingredient, cuisine and meal type requirements and MealPreApp will provide you with the best recipes matching your requirements </p>
                             <br>
-                        </div>
-                        <!-- this first dropdown allows the user to choose their main ingredient -->
-                        <div class="custom-dropdowns has-text-centered">
+                        </section>
+
+                        <!-- Dropdows container  -->
+                        <section class="custom-dropdowns has-text-centered">
                             <div class="columns is-multiline">
+                                
+                                <!-- Container for ingredient selection dropdown -->
                                 <div class="column is-4">
+                                    <!-- Ingredient dropdown list contents -->
                                     <label for="ingredientSelect" class="label has-text-weight-bold">Ingredient</label>
                                     <div class="select">
                                         <select id="ingredientSelect">
@@ -144,8 +146,10 @@
                                         </select>
                                     </div>
                                 </div>
-                                <!-- second dropdown allows the user to choose the cuisine type -->
+
+                                <!-- Container for cuisine type selection dropdown -->
                                 <div class="column is-4">
+                                    <!-- Cuisine Type dropdown list contents -->
                                     <label for="cuisineSelect" class="label has-text-weight-bold">Cuisine Type</label>
                                     <div class="select">
                                         <select id="cuisineSelect">
@@ -163,11 +167,11 @@
                                         </select>
                                     </div>
                                 </div>
+
+                                <!-- Container for meal type selection dropdown -->
                                 <div class="column is-4">
-
-                                <!-- dropdown for choosing the type of meal the would like to  -->
-                                    <label for="meal-select" class="label has-text-weight-bold">Meal Type</label>
-
+                                    <!-- Meal Type dropdown list contents -->
+                                    <label for="mealSelect" class="label has-text-weight-bold">Meal Type</label>
                                     <div class="select">
                                         <select id="mealSelect">
                                             <option value="" selected disabled>Choose an option</option>
@@ -179,48 +183,27 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </section>
                         <br>
-                        <section class="previous-searches has-text-centered">
+
+                        <!-- Container for Previous Searches -->
+                        <section class="has-text-centered">
                             <br>
                             <div class="columns is-mobile is-centered is-multiline">
+                                <!-- Previous Searches contents will be displayed if there is data in localstorage -->
                                 <ul id="previousSearchUl" class="previousSearchUl">
-                                    <li id="previousSearchLi" class="previousSearchLi">
-                                        <div class="custom-column column is-narrow box ml-1 mr-1">
-                                            Chicken Tandori with noodles
-                                        </div>
-                                    </li>
-                                    <li class="previousSearchLi">
-                                        <div class="custom-column column is-narrow box ml-1 mr-1">
-                                            Shrimp Tacos with cilantro lime crema
-                                        </div>
-                                    </li>
-                                    <li class="previousSearchLi">
-                                        <div class="custom-column column is-narrow box ml-1 mr-1">
-                                            Crunchy fried chicken
-                                        </div>
-                                    </li>
-                                    <li class="previousSearchLi">
-                                        <div class="custom-column column is-narrow box ml-1 mr-1">
-                                            Creamy Vegan Baked Pasta
-                                        </div>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                             <br>                         
                         </section>
-                        
-                    </section>
+                    </article>
 
+                    <!-- Main Modal footer   -->
                     <footer class="custom-modalBgc modal-card-foot is-flex justify-content-center">
-
+                    <!-- buttons for clearing previous recipes and get more recipes -->
                     <button id="clearLocalStorage" class="custom-button button mx-auto is-rounded is-bordered has-text-white">Clear previous recipes</button>
                     <button id="querySubmit" class="custom-button button is-rounded mx-auto has-text-white is-bordered">Get me some recipes</button>   
-
-                    <!-- buttons for clearing previous recipes and get more recipes -->
-                    <button class="custom-button button mx-auto  is-bordered">Clear previous recipes</button>
-                    <button class="custom-button button mx-auto  is-bordered">Get me some recipes</button>   
-
                     </footer>
                 </div>
             </div>
@@ -228,23 +211,28 @@
 
         <!-- Modal that serves as loading page -->
         <!-- This loading page will appear to the user while searching for the best recipes -->
-        <div id="loadingModal" class="modal is-active">
+        <div id="loadingModal" class="modal">
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
                 <div class="modal-card">
+
+                    <!-- Loading Modal header -->
                     <header class="custom-hnf custom-modalBgc modal-card-head has-text-centered">
                     <p class="modal-card-title has-text-white is-size-1">MealPreApp </p>
                     </header>
+
+                    <!-- Loading Modal Contents container -->
                     <section class="modal-card-body has-background-warning-light">
                         <div class="has-text-centered">
                             <br>
-                            <!-- this file is upgraded and present no errors -->
-                            <img src="./assets/images/loading.gif" alt="Logo" width="256" height="256">
+                            <img src="/assets/images/loading.gif" alt="Logo" width="256" height="256">
                             <br>
                             <br>
                             <br>
                         </div>
                     </section>
+
+                    <!-- Loading Modal footer -->
                     <footer class="custom-hnf custom-modalBgc modal-card-foot is-flex justify-content-center has-text-centered">
                         <p class="modal-card-title has-text-white is-size-1">Loading... </p>                    
                     </footer>
@@ -254,78 +242,66 @@
 
         <!-- Modal that serves as recipe list page -->
         <!-- this modal will be display when the recipies according to the user choices are ready  -->
-        <div id="recipeListModal" class="modal is-active">
+        <div id="recipeListModal" class="modal">
             <div class="modal-background has-background-dark"></div>
             <div class="modal-content">
                 <div class="modal-card">
+
+                    <!-- Recipe List Modal header -->
                     <header class="custom-hnf custom-modalBgc modal-card-head has-text-centered">
                     <p class="modal-card-title has-text-white is-size-1">MealPreApp </p>
                     </header>
-                    <section class="modal-card-body has-background-warning-light">
+
+                    <!-- Recipe List Modal Contents container -->
+                    <article class="modal-card-body has-background-warning-light">
+
+                        <!-- Logo container  -->
                         <div class="has-text-centered">
                             <br>
-                            <img src="./assets/images/logo.png" alt="Logo" width="256" height="256">
+                            <img src="/assets/images/logo.png" alt="Logo" width="256" height="256">
                         </div>
+
+                        <!-- Text container  -->
                         <div class="has-text-centered">
                             <br>
                             <p class="subtitle is-5"> Select a recipe from the list to display its full information</p>
                         </div>
-                        
                         <br>
+
+                        <!-- Recipe List Contents  container  -->
                         <section class="recipe-list has-text-centered">
                             <br>
                             <div class="columns is-mobile is-centered is-multiline">
+                                <!-- Recipe List contents will be dynamically created -->
                                 <ul id="recipeListUl" class="recipeListUl">
-                                    <li class="recipeListLi">
-                                        <div class="custom-column column is-narrow box mt-1 mb-1">
-                                            Chicken Tandori with noodles
-                                        </div>
-                                    </li>
-                                    <li class="recipeListLi">
-                                        <div class="custom-column column is-narrow box mt-1 mb-1">
-                                            Shrimp Tacos with cilantro lime crema
-                                        </div>
-                                    </li>
-                                    <li class="recipeListLi">
-                                        <div class="custom-column column is-narrow box mt-1 mb-1">
-                                            Crunchy fried chicken
-                                        </div>
-                                    </li>
-                                    <li class="recipeListLi">
-                                        <div class="custom-column column is-narrow box mt-1 mb-1">
-                                            Creamy Vegan Baked Pasta
-                                        </div>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                             <br>                         
                         </section>
-                    </section>
+                    </article>
+
+                    <!-- Recipe List Modal footer -->
                     <footer class="custom-modalBgc modal-card-foot is-flex justify-content-center">
                     <button id="recipeListCancelBtn" class="custom-button button mx-auto has-text-white is-rounded is-bordered">Cancel</button>
                     </footer>
                 </div>
             </div>
-
         </div>
         
-        <!-- Modal HTML for warning modal -->
+        <!-- Modal that serves as a warning alert -->
+        <!-- This modal will be displayed when the user tries to submit without selecting a value in either of the three dropdowns  -->
         <div id="warningModal" class="modal">
             <div class="modal-background"></div>
             <div class="modal-content">
                 <div class="box has-background-danger">
-                    <p class="has-text-black">⚠️ Please select an Ingredient, a Cuisine type and a Meal type to continue ⚠️</p>
+                    <p class="has-text-white is-size-5">⚠️ Select an Ingredient, a Cuisine type and a Meal type to continue ⚠️</p>
                 </div>
             </div>
             <button class="modal-close is-large" aria-label="close"></button>
         </div>
 
+    <!-- Script File -->    
     <script src="./assets/js/script.js"></script>
-
-        </div>   
-   
-        <!-- js files linked -->
-        <script src="./assets/js/script.js"></script>
-
     </body>
 </html>
