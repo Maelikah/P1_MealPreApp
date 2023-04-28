@@ -399,7 +399,7 @@ recipeListCancelBtn.addEventListener("click", function() {
 // Back to main event listener
 
 backtoMainBtn.addEventListener("click", function() {
-   
+
     location.reload(true);
 })
 
