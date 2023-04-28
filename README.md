@@ -4,40 +4,40 @@
 
 Introducing an innovative web application that empowers meal lovers to unleash their creativity and experiment with a diverse range of recipes. From simple ingredients to exquisite culinary masterpieces, this platform offers a thrilling opportunity to craft awe-inspiring plates, pushing the boundaries of culinary artistry. 
 
-From fat to fit or from fit to fat.... Our goal it unlocking culinary adventures for y'all!
+From breakfast to dinner, and everything in between, our app has recipes that can't be beat! 
 
-<h2>User Story</h2>
+<h2>Acceptance Criteria</h2>
 
 -  WHEN I open the app
-- THEN I am presented with a webpage made with Bulma CSS framework
+    - THEN I am presented with a webpage made with Bulma CSS framework
 - WHEN I navigate on the main page
-- THEN I am presented with an input text box and two select dropdown lists
+    - THEN I am presented with an input text box and two select dropdown lists
 - WHEN I click on the button without selecting a value for the text box and dropdowns
-- THEN I am presented with a modal warning window, explaining i need to add data in all of them
+    - THEN I am presented with a modal warning window, explaining i need to add data in all of them
 - WHEN I click on get me some recipes button
-- THEN an API call to EDAMAM and USDA is made to retrieve data
+    - THEN an API call to EDAMAM and USDA is made to retrieve data
 - WHEN I click on the button after adding all data
-- THEN I am sent to a loading page that lasts 6 seconds
+    - THEN I am sent to a loading page that lasts 6 seconds
 - WHEN I have waited 6 seconds
-- THEN I am presented with the list of recipes that match the criteria I provided
+    - THEN I am presented with the list of recipes that match the criteria I provided
 - WHEN I click on the Cancel button
-- THEN the page is reloaded and I am sent back to the main page
+    - THEN the page is reloaded and I am sent back to the main page
 - WHEN I click on a listed recipe
-- THEN I am sent to a loading page that lasts 6 seconds
+    - THEN I am sent to a loading page that lasts 6 seconds
 - WHEN I have waited 6 seconds
-- THEN I am presented with the recipe page where an image, name, list of ingredients, link and nutrients are displayed
+    - THEN I am presented with the recipe page where an image, name, list of ingredients, link and nutrients are displayed
 - WHEN I click on the Get Recipe Button
-- THEN I am redirected to the recipe's orgin webpage
+    - THEN I am redirected to the recipe's orgin webpage
 - WHEN I click on the Back to List button
-- THEN I am sent back to the recipe's list
+    - THEN I am sent back to the recipe's list
 - WHEN I click on the Back to Main button
-- THEN the page is reloaded and I am sent back to the main page
+    - THEN the page is reloaded and I am sent back to the main page
 - WHEN I have searched for a previous recipe and get in the page again
-- THEN I am presented with the previously searched recipe and a clear previous recipes button
+    - THEN I am presented with the previously searched recipe and a clear previous recipes button
 - WHEN I click on the clear previous recipes button
-- THEN the contents of the local storage and the listed recipes are deleted
+    - THEN the contents of the local storage and the listed recipes are deleted
 - WHEN I click on a previously searched recipe
-- THEN I am sent to the recipe page and the Go back to list button is not displayed
+    - THEN I am sent to the recipe page and the Go back to list button is not displayed
 
 
 ## Installation
@@ -74,6 +74,9 @@ Installation not required, just open up the MealPreApp html file and follow the 
 - https://encycolorpedia.com/
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice
 - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map
+- https://fdc.nal.usda.gov/
+- https://blog.logrocket.com/localstorage-javascript-complete-guide/
+- https://www.javascripttutorial.net/javascript-dom/javascript-select-box/
 
 
 ## License
