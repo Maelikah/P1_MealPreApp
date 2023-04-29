@@ -53,6 +53,17 @@ Installation not required, just open up the MealPreApp html file and follow the 
 
 ## Usage
 
+The github URL containing the code for this challenge is located at:
+
+https://github.com/Maelikah/P1_MealPreApp
+
+The github pages URL containing the deployed webpage is located at:
+
+https://maelikah.github.io/P1_MealPreApp/ to an external site.
+
+Here are some screenshots for reference:
+
+
 <img width="638" alt="Screenshot 2023-04-25 at 20 36 22" src="https://user-images.githubusercontent.com/124849302/234452879-86a293d9-4a1c-4875-9327-a1434df83fe4.png">
 
 <img width="637" alt="Screenshot 2023-04-27 at 18 54 04" src="https://user-images.githubusercontent.com/124849302/235029206-784760c9-b8ce-4baf-adf3-40657f257622.png">
